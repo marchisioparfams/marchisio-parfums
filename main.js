@@ -120,6 +120,14 @@
 
   var RECS = [
     {
+      cond: function (a) { return a[4] === 'completo'; },
+      isCatalog: true,
+      name: 'El catálogo completo es para vos', marca: '', formato: 'Diseñador / Árabe 100ml',
+      desc: 'Tenemos más de 1.500 fragancias 100ml de Lattafa, Armaf, Afnan, Chanel, Dior, YSL, Versace y muchas más. Te invitamos a explorar el catálogo completo y encontrar tu favorita.',
+      price: 'Más de 80 marcas disponibles',
+      wa: 'Hola!%20Quiero%20ver%20el%20catálogo%20completo%20de%20fragancias%20100ml'
+    },
+    {
       cond: function (a) { return a[3] === 'dulce' && a[0] === 'femenino'; },
       name: 'Lattafa Yara Candy', marca: 'Lattafa', formato: 'Tubito 35ml o Mini 50ml',
       desc: 'Dulce, frutal y adictivo. La fragancia perfecta para vos: rosa, frutas tropicales y caramelo. Proyección buena y duración envidiable.',
@@ -216,6 +224,8 @@
       showStep(quizState.step);
     } else {
       var rec = getRecommendation(quizState.answers);
+      var iconEl = document.getElementById('quiz-result-icon');
+      var titleEl = document.getElementById('quiz-result-title');
       var nameEl = document.getElementById('quiz-result-name');
       var descEl = document.getElementById('quiz-result-desc');
       var priceEl = document.getElementById('quiz-result-price');
@@ -223,7 +233,23 @@
       if (nameEl) nameEl.textContent = rec.name;
       if (descEl) descEl.textContent = rec.desc;
       if (priceEl) priceEl.textContent = '💰 ' + rec.price;
-      if (waEl) waEl.href = 'https://wa.me/5491112345678?text=' + rec.wa;
+      if (rec.isCatalog) {
+        if (iconEl) iconEl.textContent = '🛍️';
+        if (titleEl) titleEl.textContent = 'Te recomendamos:';
+        if (waEl) {
+          waEl.href = 'catalogo-completo.html';
+          waEl.target = '_self';
+          waEl.textContent = 'Ver catálogo completo →';
+        }
+      } else {
+        if (iconEl) iconEl.textContent = '✨';
+        if (titleEl) titleEl.textContent = 'Tu fragancia ideal es:';
+        if (waEl) {
+          waEl.href = 'https://wa.me/5491112345678?text=' + rec.wa;
+          waEl.target = '_blank';
+          waEl.textContent = 'Consultar por WhatsApp →';
+        }
+      }
       showStep('result');
     }
   };
