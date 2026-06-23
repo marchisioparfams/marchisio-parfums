@@ -131,28 +131,28 @@
       cond: function (a) { return a[3] === 'dulce' && a[0] === 'femenino'; },
       name: 'Lattafa Yara Candy', marca: 'Lattafa', formato: 'Tubito 35ml o Mini 50ml',
       desc: 'Dulce, frutal y adictivo. La fragancia perfecta para vos: rosa, frutas tropicales y caramelo. Proyección buena y duración envidiable.',
-      price: 'Tubito 35ml: $8.000 · Mini 50ml: $20.000',
+      price: 'Tubito 35ml: desde $7.600 · Mini 50ml: desde $18.100',
       wa: 'Hola!%20El%20quiz%20me%20recomendó%20el%20Lattafa%20Yara%20Candy.%20¿Qué%20opciones%20tienen%3F'
     },
     {
       cond: function (a) { return a[3] === 'dulce' && a[0] !== 'masculino'; },
       name: 'Lattafa Yara Rosa', marca: 'Lattafa', formato: 'Tubito 35ml o Mini 50ml',
       desc: 'La más querida del catálogo árabe. Rosa fresca, frutas tropicales y vainilla. Dulce sin empalagar, femenino y vibrante.',
-      price: 'Tubito 35ml: $8.000 · Mini 50ml: $20.000',
+      price: 'Tubito 35ml: desde $7.600 · Mini 50ml: desde $18.100',
       wa: 'Hola!%20El%20quiz%20me%20recomendó%20el%20Lattafa%20Yara%20Rosa.%20¿Qué%20opciones%20tienen%3F'
     },
     {
       cond: function (a) { return a[3] === 'oriental' && a[0] === 'masculino'; },
       name: 'Armaf Club de Nuit Intense Man', marca: 'Armaf', formato: 'Mini 30ml',
       desc: 'El clon de Aventus más aclamado. Fruta, ahumado, madera seca y cuero. Bestial proyección. El perfume que no pasa desapercibido.',
-      price: 'Mini 30ml: $15.000',
+      price: 'Mini 30ml: desde $13.700',
       wa: 'Hola!%20El%20quiz%20me%20recomendó%20el%20Armaf%20Club%20de%20Nuit%20Intense%20Man.%20¿Qué%20opciones%20tienen%3F'
     },
     {
       cond: function (a) { return a[3] === 'oriental' && a[2] === 'especial'; },
       name: 'Lattafa Asad Negro', marca: 'Lattafa', formato: 'Mini 50ml',
       desc: 'Oud negro intenso, cuero y especias exóticas. Para las grandes ocasiones. Una presencia que llena el ambiente y se recuerda siempre.',
-      price: 'Mini 50ml: $20.000',
+      price: 'Mini 50ml: desde $18.100',
       wa: 'Hola!%20El%20quiz%20me%20recomendó%20el%20Lattafa%20Asad%20Negro.%20¿Qué%20opciones%20tienen%3F'
     },
     {
@@ -166,35 +166,35 @@
       cond: function (a) { return a[3] === 'floral' && a[2] === 'noche'; },
       name: 'Afnan 9PM Black', marca: 'Afnan', formato: 'Mini 30ml',
       desc: 'Floral oscuro y nocturno. El 9PM Black tiene una profundidad especial con notas florales exóticas sobre especias cálidas. Para la noche que se extiende.',
-      price: 'Mini 30ml: $15.000',
+      price: 'Mini 30ml: desde $13.700',
       wa: 'Hola!%20El%20quiz%20me%20recomendó%20el%20Afnan%209PM%20Black.%20¿Tienen%20disponible%3F'
     },
     {
       cond: function (a) { return a[3] === 'fresco' && a[0] === 'masculino'; },
       name: 'Armaf Odyssey Mandarin Sky', marca: 'Armaf', formato: 'Tubito 35ml',
       desc: 'Mandarina fresca explosiva sobre fondo amaderado. Energético, moderno y con proyección sorprendente. El favorito para el día a día masculino.',
-      price: 'Tubito 35ml: $8.000',
+      price: 'Tubito 35ml: desde $7.600',
       wa: 'Hola!%20El%20quiz%20me%20recomendó%20el%20Armaf%20Odyssey%20Mandarin%20Sky.%20¿Tienen%20disponible%3F'
     },
     {
       cond: function (a) { return a[3] === 'fresco'; },
       name: 'Lattafa Yara Tous Naranja', marca: 'Lattafa', formato: 'Mini 50ml',
       desc: 'Cítrico, vibrante y veraniego. Naranja fresca con corazón floral y base suave. Ideal para el calor y el uso diario.',
-      price: 'Mini 50ml: $20.000',
+      price: 'Mini 50ml: desde $18.100',
       wa: 'Hola!%20El%20quiz%20me%20recomendó%20el%20Lattafa%20Yara%20Tous%20Naranja.%20¿Tienen%20disponible%3F'
     },
     {
       cond: function (a) { return a[5] === 'bajo'; },
       name: 'Lattafa Yara Moi Blanco', marca: 'Lattafa', formato: 'Tubito 35ml',
       desc: 'Floral suave y almizclado. Elegante, versátil y asequible. Una excelente introducción al mundo de las fragancias árabes.',
-      price: 'Tubito 35ml: $8.000',
+      price: 'Tubito 35ml: desde $7.600',
       wa: 'Hola!%20El%20quiz%20me%20recomendó%20el%20Lattafa%20Yara%20Moi%20Blanco.%20¿Tienen%20disponible%3F'
     },
     {
       cond: function () { return true; },
       name: 'Lattafa Badee Al Oud For Glory', marca: 'Lattafa', formato: 'Mini 30ml',
       desc: 'Oud negro profundo con rosa árabe. El bestseller definitivo. Elegante, intenso y con una proyección que se queda en la memoria.',
-      price: 'Mini 30ml: $15.000',
+      price: 'Mini 30ml: desde $13.700',
       wa: 'Hola!%20El%20quiz%20me%20recomendó%20el%20Lattafa%20Badee%20Al%20Oud%20For%20Glory.%20¿Tienen%20disponible%3F'
     }
   ];
@@ -245,7 +245,7 @@
         if (iconEl) iconEl.textContent = '✨';
         if (titleEl) titleEl.textContent = 'Tu fragancia ideal es:';
         if (waEl) {
-          waEl.href = 'https://wa.me/5491112345678?text=' + rec.wa;
+          waEl.href = 'https://wa.me/5491156541022?text=' + rec.wa;
           waEl.target = '_blank';
           waEl.textContent = 'Consultar por WhatsApp →';
         }
@@ -273,7 +273,7 @@
       + '🌸 Marca: ' + (marca || 'A confirmar') + '\n'
       + (fragancia ? '💎 Fragancia/Producto: ' + fragancia + '\n' : '')
       + (nota ? '📝 Nota: ' + nota : '');
-    window.open('https://wa.me/5491112345678?text=' + encodeURIComponent(msg), '_blank');
+    window.open('https://wa.me/5491156541022?text=' + encodeURIComponent(msg), '_blank');
   };
 
   /* ---- SMOOTH ANCHORS ---- */
