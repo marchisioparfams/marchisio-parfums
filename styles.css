@@ -150,6 +150,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-weight:30
 .card-img-placeholder::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 30%,rgba(255,255,255,.07) 0%,transparent 60%)}
 .bottle-svg{height:95px;position:relative;z-index:1}
 .card-img-brand{font-family:var(--fm);font-size:.58rem;letter-spacing:.15em;color:rgba(255,255,255,.45);position:relative;z-index:1}
+.card-img-real{height:190px;width:100%;object-fit:cover;object-position:center;display:block;background:var(--bg3)}
 .card-badge-formato,.card-badge-gender{position:absolute;font-family:var(--fm);font-size:.52rem;letter-spacing:.07em;padding:.2rem .6rem;border-radius:20px}
 .card-badge-formato{top:9px;left:9px;background:rgba(201,163,91,.92);color:var(--bg)}
 .card-badge-gender{top:9px;right:9px;background:rgba(9,9,15,.82);border:1px solid var(--border);color:var(--muted)}
