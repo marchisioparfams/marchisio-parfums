@@ -1,5 +1,5 @@
 /* =====================
-   MARCHISIO PARFUMS · CARRITO / LISTA DE PEDIDO
+   MARCHISIO PARFAMS · CARRITO / LISTA DE PEDIDO
    Persistencia en localStorage, compartido entre index.html y catalogo-completo.html
    ===================== */
 (function () {
@@ -167,7 +167,16 @@
       var priceEl = card.querySelector('.card-price');
       if (!nameEl || !priceEl) return;
 
-      var fullName = (marcaEl ? marcaEl.textContent.trim() + ' — ' : '') + nameEl.textContent.trim();
+      var sel = card.querySelector('.variant-select');
+      function currentName() {
+        var base = (marcaEl ? marcaEl.textContent.trim() + ' — ' : '') + nameEl.textContent.trim();
+        var fam = card.querySelector('.card-familia');
+        var conc = fam ? fam.textContent.split('·')[0].trim() : '';
+        if (conc && /^(EDP|EDT|EDC|Extrait|Parfum)/i.test(conc)) base += ' ' + conc;
+        if (sel && sel.value) base += ' ' + sel.value + 'ml';
+        return base;
+      }
+      var fullName = currentName();
       var priceLabel = priceEl.textContent.trim();
 
       var actions = document.createElement('div');
@@ -180,7 +189,15 @@
       addBtn.setAttribute('data-name', fullName);
       addBtn.textContent = '+ Agregar al pedido';
 
+      if (sel) sel.addEventListener('change', function () {
+        addBtn.setAttribute('data-name', currentName());
+        addBtn.classList.remove('added');
+        addBtn.textContent = '+ Agregar al pedido';
+        setTimeout(function () { renderCart(); }, 0);
+      });
       addBtn.addEventListener('click', function () {
+        fullName = currentName(); priceLabel = priceEl.textContent.trim();
+        addBtn.setAttribute('data-name', fullName);
         addItem({ name: fullName, priceLabel: priceLabel, qty: 1 });
         addBtn.classList.add('added');
         setTimeout(function () { renderCart(); }, 0);

@@ -1,5 +1,5 @@
 /* =====================
-   MARCHISIO PARFUMS · main.js v20260605
+   MARCHISIO PARFAMS · main.js v20261110
    ===================== */
 (function () {
   'use strict';
@@ -92,7 +92,7 @@
         btn.classList.add('active');
         var f = btn.getAttribute('data-filter');
         cards.forEach(function (c) {
-          if (f === 'all' || (c.getAttribute('data-tags') || '').indexOf(f) !== -1) {
+          if (f === 'all' || ((' ' + (c.getAttribute('data-tags') || '') + ' ').indexOf(' ' + f + ' ') !== -1)) {
             c.classList.remove('hidden');
           } else {
             c.classList.add('hidden');
@@ -115,96 +115,60 @@
   };
 
   /* ---- QUIZ ENGINE ---- */
+  var CFG = window.MP_CONFIG || {};
+  var WA_NUMBER = CFG.WHATSAPP || '5491156541022';
   var quizState = { step: 0, answers: {} };
   var TOTAL_STEPS = 6;
 
-  var RECS = [
-    {
-      cond: function (a) { return a[4] === 'completo'; },
-      isCatalog: true,
-      name: 'El catálogo completo es para vos', marca: '', formato: 'Diseñador / Árabe 100ml',
-      desc: 'Tenemos más de 1.500 fragancias 100ml de Lattafa, Armaf, Afnan, Chanel, Dior, YSL, Versace y muchas más. Te invitamos a explorar el catálogo completo y encontrar tu favorita.',
-      price: 'Más de 80 marcas disponibles',
-      wa: 'Hola!%20Quiero%20ver%20el%20catálogo%20completo%20de%20fragancias%20100ml'
-    },
-    {
-      cond: function (a) { return a[3] === 'dulce' && a[0] === 'femenino'; },
-      name: 'Lattafa Yara Candy', marca: 'Lattafa', formato: 'Tubito 35ml o Mini 50ml',
-      desc: 'Dulce, frutal y adictivo. La fragancia perfecta para vos: rosa, frutas tropicales y caramelo. Proyección buena y duración envidiable.',
-      price: 'Tubito 35ml: desde $7.600 · Mini 50ml: desde $18.100',
-      wa: 'Hola!%20El%20quiz%20me%20recomendó%20el%20Lattafa%20Yara%20Candy.%20¿Qué%20opciones%20tienen%3F'
-    },
-    {
-      cond: function (a) { return a[3] === 'dulce' && a[0] !== 'masculino'; },
-      name: 'Lattafa Yara Rosa', marca: 'Lattafa', formato: 'Tubito 35ml o Mini 50ml',
-      desc: 'La más querida del catálogo árabe. Rosa fresca, frutas tropicales y vainilla. Dulce sin empalagar, femenino y vibrante.',
-      price: 'Tubito 35ml: desde $7.600 · Mini 50ml: desde $18.100',
-      wa: 'Hola!%20El%20quiz%20me%20recomendó%20el%20Lattafa%20Yara%20Rosa.%20¿Qué%20opciones%20tienen%3F'
-    },
-    {
-      cond: function (a) { return a[3] === 'oriental' && a[0] === 'masculino'; },
-      name: 'Armaf Club de Nuit Intense Man', marca: 'Armaf', formato: 'Mini 30ml',
-      desc: 'El clon de Aventus más aclamado. Fruta, ahumado, madera seca y cuero. Bestial proyección. El perfume que no pasa desapercibido.',
-      price: 'Mini 30ml: desde $13.700',
-      wa: 'Hola!%20El%20quiz%20me%20recomendó%20el%20Armaf%20Club%20de%20Nuit%20Intense%20Man.%20¿Qué%20opciones%20tienen%3F'
-    },
-    {
-      cond: function (a) { return a[3] === 'oriental' && a[2] === 'especial'; },
-      name: 'Lattafa Asad Negro', marca: 'Lattafa', formato: 'Mini 50ml',
-      desc: 'Oud negro intenso, cuero y especias exóticas. Para las grandes ocasiones. Una presencia que llena el ambiente y se recuerda siempre.',
-      price: 'Mini 50ml: desde $18.100',
-      wa: 'Hola!%20El%20quiz%20me%20recomendó%20el%20Lattafa%20Asad%20Negro.%20¿Qué%20opciones%20tienen%3F'
-    },
-    {
-      cond: function (a) { return a[3] === 'floral' && a[1] === 'teen'; },
-      name: 'Victoria Secret Pure Seduction', marca: 'Victoria Secret', formato: 'Body Mist',
-      desc: 'Frutas rojas y jazmín fresco. Alegre, joven y perfecta para el día a día. El body mist que se vuelve inseparable.',
-      price: 'Body Mist: $18.415',
-      wa: 'Hola!%20El%20quiz%20me%20recomendó%20el%20Victoria%20Secret%20Pure%20Seduction.%20¿Tienen%20disponible%3F'
-    },
-    {
-      cond: function (a) { return a[3] === 'floral' && a[2] === 'noche'; },
-      name: 'Afnan 9PM Black', marca: 'Afnan', formato: 'Mini 30ml',
-      desc: 'Floral oscuro y nocturno. El 9PM Black tiene una profundidad especial con notas florales exóticas sobre especias cálidas. Para la noche que se extiende.',
-      price: 'Mini 30ml: desde $13.700',
-      wa: 'Hola!%20El%20quiz%20me%20recomendó%20el%20Afnan%209PM%20Black.%20¿Tienen%20disponible%3F'
-    },
-    {
-      cond: function (a) { return a[3] === 'fresco' && a[0] === 'masculino'; },
-      name: 'Armaf Odyssey Mandarin Sky', marca: 'Armaf', formato: 'Tubito 35ml',
-      desc: 'Mandarina fresca explosiva sobre fondo amaderado. Energético, moderno y con proyección sorprendente. El favorito para el día a día masculino.',
-      price: 'Tubito 35ml: desde $7.600',
-      wa: 'Hola!%20El%20quiz%20me%20recomendó%20el%20Armaf%20Odyssey%20Mandarin%20Sky.%20¿Tienen%20disponible%3F'
-    },
-    {
-      cond: function (a) { return a[3] === 'fresco'; },
-      name: 'Lattafa Yara Tous Naranja', marca: 'Lattafa', formato: 'Mini 50ml',
-      desc: 'Cítrico, vibrante y veraniego. Naranja fresca con corazón floral y base suave. Ideal para el calor y el uso diario.',
-      price: 'Mini 50ml: desde $18.100',
-      wa: 'Hola!%20El%20quiz%20me%20recomendó%20el%20Lattafa%20Yara%20Tous%20Naranja.%20¿Tienen%20disponible%3F'
-    },
-    {
-      cond: function (a) { return a[5] === 'bajo'; },
-      name: 'Lattafa Yara Moi Blanco', marca: 'Lattafa', formato: 'Tubito 35ml',
-      desc: 'Floral suave y almizclado. Elegante, versátil y asequible. Una excelente introducción al mundo de las fragancias árabes.',
-      price: 'Tubito 35ml: desde $7.600',
-      wa: 'Hola!%20El%20quiz%20me%20recomendó%20el%20Lattafa%20Yara%20Moi%20Blanco.%20¿Tienen%20disponible%3F'
-    },
-    {
-      cond: function () { return true; },
-      name: 'Lattafa Badee Al Oud For Glory', marca: 'Lattafa', formato: 'Mini 30ml',
-      desc: 'Oud negro profundo con rosa árabe. El bestseller definitivo. Elegante, intenso y con una proyección que se queda en la memoria.',
-      price: 'Mini 30ml: desde $13.700',
-      wa: 'Hola!%20El%20quiz%20me%20recomendó%20el%20Lattafa%20Badee%20Al%20Oud%20For%20Glory.%20¿Tienen%20disponible%3F'
-    }
-  ];
+  /* Recomendaciones: sólo originales sellados (árabes, diseñador) y Body Splash VS */
+  var SPLASH = {
+    dulce:    { name: 'Victoria Secret Bare Vainilla', desc: 'Vainilla suave y envolvente sobre una base cremosa. Cálida, dulce y reconfortante.', fam: 'Bare Vainilla' },
+    fresco:   { name: 'Victoria Secret Aqua Kiss', desc: 'Floral especiado con frescura acuática. Liviana y perfecta para todos los días.', fam: 'Aqua Kiss' },
+    floral:   { name: 'Victoria Secret Pure Seduction', desc: 'Frutas rojas y jazmín fresco. El body splash favorito para el uso cotidiano.', fam: 'Pure Seduction' },
+    oriental: { name: 'Victoria Secret Amber Romance', desc: 'Ámbar cálido, vainilla y musk. Sensual, envolvente y adictivo.', fam: 'Amber Romance' }
+  };
+  var ARABE = {
+    dulce_f:  { name: 'Lattafa Yara', q: 'Yara', price: 'Desde $49.000', desc: 'Dulce, cremoso y femenino: orquídea, vainilla y frutas. Uno de los árabes más pedidos.' },
+    dulce:    { name: 'Lattafa Khamrah', q: 'Khamrah', price: 'Desde $48.000', desc: 'Canela, dátiles y vainilla. Gourmand cálido de gran duración, muy popular en noches frías.' },
+    oriental: { name: 'Lattafa Asad', q: 'Asad', price: 'Desde $48.000', desc: 'Especiado, amaderado y con carácter. Intenso y de mucha proyección.' },
+    fresco:   { name: 'Armaf Odyssey Mandarin Sky', q: 'Mandarin', price: 'Desde $56.500', desc: 'Cítrico y fresco con fondo amaderado. Ideal para el día y el verano.' },
+    floral:   { name: 'Lattafa Yara', q: 'Yara', price: 'Desde $49.000', desc: 'Floral, suave y delicado, con un toque dulce que enamora.' }
+  };
+  var DISENADOR = {
+    masculino_fresco:   { name: 'Dior Sauvage', q: 'Sauvage', price: 'Desde $198.000', desc: 'El clásico fresco y especiado. Versátil para cualquier ocasión.' },
+    masculino:          { name: 'Paco Rabanne 1 Million', q: 'One Million', price: 'Desde $124.000', desc: 'Dulce, especiado y llamativo. Pensado para las noches y las ocasiones especiales.' },
+    femenino_fresco:    { name: 'Dolce & Gabbana Light Blue', q: 'Light Blue', price: 'Desde $156.000', desc: 'Cítrico y luminoso. Un clásico fresco para el verano y el día a día.' },
+    femenino:           { name: 'Carolina Herrera Good Girl', q: 'Good Girl', price: 'Desde $185.000', desc: 'Dulce, floral y seductor. Un ícono de las noches y las ocasiones especiales.' },
+    unisex:             { name: 'Los clásicos de diseñador', q: '', price: 'Desde $100.000', desc: 'Mirá todo el catálogo de diseñador y elegí el que más te guste.' }
+  };
 
-  function getRecommendation(answers) {
-    for (var i = 0; i < RECS.length; i++) {
-      if (RECS[i].cond(answers)) return RECS[i];
-    }
-    return RECS[RECS.length - 1];
+  function pickFormat(a) {
+    if (a[4] && a[4] !== 'cualquiera') return a[4];
+    if (a[5] === 'alto') return 'disenador';
+    if (a[5] === 'medio') return 'arabe';
+    return a[0] === 'femenino' ? 'splash' : 'arabe';
   }
+
+  function buildRec(a) {
+    var fmt = pickFormat(a), scent = a[3] || 'dulce', g = a[0];
+    if (fmt === 'splash') {
+      var sp = SPLASH[scent] || SPLASH.dulce;
+      return { kind: 'splash', name: sp.name, desc: sp.desc, price: 'Body Splash 250 ml: $25.000', fam: sp.fam,
+        wa: 'Hola!%20El%20buscador%20me%20recomend%C3%B3%20el%20' + encodeURIComponent(sp.name) + '.%20%C2%BFTienen%20disponible%3F' };
+    }
+    if (fmt === 'arabe') {
+      var ar = (scent === 'dulce' && g === 'femenino') ? ARABE.dulce_f : (ARABE[scent] || ARABE.dulce);
+      return { kind: 'catalog', name: ar.name, desc: ar.desc, price: ar.price, fam: ar.name,
+        url: 'catalogo-completo.html?f=arabe&q=' + encodeURIComponent(ar.q) };
+    }
+    var key = g + (scent === 'fresco' ? '_fresco' : '');
+    var di = DISENADOR[key] || DISENADOR[g] || DISENADOR.unisex;
+    return { kind: 'catalog', name: di.name, desc: di.desc, price: di.price, fam: di.name,
+      url: 'catalogo-completo.html?f=disenador' + (di.q ? '&q=' + encodeURIComponent(di.q) : '') };
+  }
+  var RECS = [];
+
+  function getRecommendation(answers) { return buildRec(answers); }
 
   function showStep(n) {
     document.querySelectorAll('.quiz-step').forEach(function (el) { el.classList.remove('active'); });
@@ -224,30 +188,29 @@
       showStep(quizState.step);
     } else {
       var rec = getRecommendation(quizState.answers);
+      quizState.rec = rec;
       var iconEl = document.getElementById('quiz-result-icon');
       var titleEl = document.getElementById('quiz-result-title');
       var nameEl = document.getElementById('quiz-result-name');
       var descEl = document.getElementById('quiz-result-desc');
       var priceEl = document.getElementById('quiz-result-price');
       var waEl = document.getElementById('quiz-wa-link');
+      var fragEl = document.getElementById('quiz-email-fragname');
+      var capEl = document.getElementById('quiz-email-capture');
       if (nameEl) nameEl.textContent = rec.name;
       if (descEl) descEl.textContent = rec.desc;
       if (priceEl) priceEl.textContent = '💰 ' + rec.price;
-      if (rec.isCatalog) {
-        if (iconEl) iconEl.textContent = '🛍️';
-        if (titleEl) titleEl.textContent = 'Te recomendamos:';
-        if (waEl) {
-          waEl.href = 'catalogo-completo.html';
-          waEl.target = '_self';
-          waEl.textContent = 'Ver catálogo completo →';
-        }
-      } else {
-        if (iconEl) iconEl.textContent = '✨';
-        if (titleEl) titleEl.textContent = 'Tu fragancia ideal es:';
-        if (waEl) {
-          waEl.href = 'https://wa.me/5491156541022?text=' + rec.wa;
-          waEl.target = '_blank';
-          waEl.textContent = 'Consultar por WhatsApp →';
+      if (fragEl) fragEl.textContent = rec.name;
+      if (capEl) { capEl.style.display = ''; }
+      var cf = document.getElementById('quiz-email-confirm'); if (cf) cf.style.display = 'none';
+      var er = document.getElementById('quiz-email-error'); if (er) er.style.display = 'none';
+      if (titleEl) titleEl.textContent = 'Te recomendamos:';
+      if (iconEl) iconEl.textContent = rec.kind === 'splash' ? '🌸' : '✨';
+      if (waEl) {
+        if (rec.kind === 'catalog') {
+          waEl.href = rec.url; waEl.target = '_self'; waEl.textContent = 'Ver en el catálogo →';
+        } else {
+          waEl.href = 'https://wa.me/' + WA_NUMBER + '?text=' + rec.wa; waEl.target = '_blank'; waEl.textContent = 'Consultar por WhatsApp →';
         }
       }
       showStep('result');
@@ -257,6 +220,32 @@
   window.resetQuiz = function () {
     quizState = { step: 0, answers: {} };
     showStep(0);
+  };
+
+  /* ---- AVISO DE STOCK POR MAIL (después del resultado del buscador) ---- */
+  window.submitQuizEmail = function () {
+    var input = document.getElementById('quiz-email-input');
+    var err = document.getElementById('quiz-email-error');
+    var ok = document.getElementById('quiz-email-confirm');
+    var email = ((input || {}).value || '').trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { if (err) err.style.display = 'block'; return; }
+    if (err) err.style.display = 'none';
+    var frag = (quizState.rec && quizState.rec.name) || '';
+    var a = quizState.answers || {};
+    try {
+      var list = JSON.parse(localStorage.getItem('mp_quiz_leads') || '[]');
+      list.push({ email: email, fragancia: frag, respuestas: a, fecha: new Date().toISOString() });
+      localStorage.setItem('mp_quiz_leads', JSON.stringify(list));
+    } catch (e) {}
+    function done() { if (ok) ok.style.display = 'block'; var row = document.querySelector('.quiz-email-row'); if (row) row.style.display = 'none'; }
+    if (CFG.EMAIL_ENDPOINT) {
+      fetch(CFG.EMAIL_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ email: email, fragancia: frag, respuestas: a }) }).then(done).catch(done);
+    } else {
+      var msg = 'Hola! Quiero que me avisen cuando haya stock de ' + frag + '. Mi mail: ' + email;
+      window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg), '_blank');
+      done();
+    }
   };
 
   /* ---- WHATSAPP FORM ---- */
@@ -273,7 +262,7 @@
       + '🌸 Marca: ' + (marca || 'A confirmar') + '\n'
       + (fragancia ? '💎 Fragancia/Producto: ' + fragancia + '\n' : '')
       + (nota ? '📝 Nota: ' + nota : '');
-    window.open('https://wa.me/5491156541022?text=' + encodeURIComponent(msg), '_blank');
+    window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg), '_blank');
   };
 
   /* ---- SMOOTH ANCHORS ---- */
