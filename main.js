@@ -128,18 +128,18 @@
     oriental: { name: 'Victoria Secret Amber Romance', desc: 'Ámbar cálido, vainilla y musk. Sensual, envolvente y adictivo.', fam: 'Amber Romance' }
   };
   var ARABE = {
-    dulce_f:  { name: 'Lattafa Yara', q: 'Yara', price: 'Desde $49.000', desc: 'Dulce, cremoso y femenino: orquídea, vainilla y frutas. Uno de los árabes más pedidos.' },
-    dulce:    { name: 'Lattafa Khamrah', q: 'Khamrah', price: 'Desde $48.000', desc: 'Canela, dátiles y vainilla. Gourmand cálido de gran duración, muy popular en noches frías.' },
-    oriental: { name: 'Lattafa Asad', q: 'Asad', price: 'Desde $48.000', desc: 'Especiado, amaderado y con carácter. Intenso y de mucha proyección.' },
-    fresco:   { name: 'Armaf Odyssey Mandarin Sky', q: 'Mandarin', price: 'Desde $56.500', desc: 'Cítrico y fresco con fondo amaderado. Ideal para el día y el verano.' },
-    floral:   { name: 'Lattafa Yara', q: 'Yara', price: 'Desde $49.000', desc: 'Floral, suave y delicado, con un toque dulce que enamora.' }
+    dulce_f:  { name: 'Lattafa Yara', q: 'Yara', price: 'Precio a consultar por WhatsApp', desc: 'Dulce, cremoso y femenino: orquídea, vainilla y frutas. Uno de los árabes más pedidos.' },
+    dulce:    { name: 'Lattafa Khamrah', q: 'Khamrah', price: 'Precio a consultar por WhatsApp', desc: 'Canela, dátiles y vainilla. Gourmand cálido de gran duración, muy popular en noches frías.' },
+    oriental: { name: 'Lattafa Asad', q: 'Asad', price: 'Precio a consultar por WhatsApp', desc: 'Especiado, amaderado y con carácter. Intenso y de mucha proyección.' },
+    fresco:   { name: 'Armaf Odyssey Mandarin Sky', q: 'Mandarin', price: 'Precio a consultar por WhatsApp', desc: 'Cítrico y fresco con fondo amaderado. Ideal para el día y el verano.' },
+    floral:   { name: 'Lattafa Yara', q: 'Yara', price: 'Precio a consultar por WhatsApp', desc: 'Floral, suave y delicado, con un toque dulce que enamora.' }
   };
   var DISENADOR = {
-    masculino_fresco:   { name: 'Dior Sauvage', q: 'Sauvage', price: 'Desde $198.000', desc: 'El clásico fresco y especiado. Versátil para cualquier ocasión.' },
-    masculino:          { name: 'Paco Rabanne 1 Million', q: 'One Million', price: 'Desde $124.000', desc: 'Dulce, especiado y llamativo. Pensado para las noches y las ocasiones especiales.' },
-    femenino_fresco:    { name: 'Dolce & Gabbana Light Blue', q: 'Light Blue', price: 'Desde $156.000', desc: 'Cítrico y luminoso. Un clásico fresco para el verano y el día a día.' },
-    femenino:           { name: 'Carolina Herrera Good Girl', q: 'Good Girl', price: 'Desde $185.000', desc: 'Dulce, floral y seductor. Un ícono de las noches y las ocasiones especiales.' },
-    unisex:             { name: 'Los clásicos de diseñador', q: '', price: 'Desde $100.000', desc: 'Mirá todo el catálogo de diseñador y elegí el que más te guste.' }
+    masculino_fresco:   { name: 'Dior Sauvage', q: 'Sauvage', price: 'Precio a consultar por WhatsApp', desc: 'El clásico fresco y especiado. Versátil para cualquier ocasión.' },
+    masculino:          { name: 'Paco Rabanne 1 Million', q: 'One Million', price: 'Precio a consultar por WhatsApp', desc: 'Dulce, especiado y llamativo. Pensado para las noches y las ocasiones especiales.' },
+    femenino_fresco:    { name: 'Dolce & Gabbana Light Blue', q: 'Light Blue', price: 'Precio a consultar por WhatsApp', desc: 'Cítrico y luminoso. Un clásico fresco para el verano y el día a día.' },
+    femenino:           { name: 'Carolina Herrera Good Girl', q: 'Good Girl', price: 'Precio a consultar por WhatsApp', desc: 'Dulce, floral y seductor. Un ícono de las noches y las ocasiones especiales.' },
+    unisex:             { name: 'Los clásicos de diseñador', q: '', price: 'Precio a consultar por WhatsApp', desc: 'Mirá todo el catálogo de diseñador y elegí el que más te guste.' }
   };
 
   function pickFormat(a) {
